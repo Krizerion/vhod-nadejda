@@ -15,4 +15,9 @@ export const routes: Routes = [
         (m) => m.ApartmentDetailsComponent
       ),
   },
+  {
+    path: 'bills',
+    loadComponent: () =>
+      import('./bills/bills').then((m) => m.BillsComponent),
+  },
 ];

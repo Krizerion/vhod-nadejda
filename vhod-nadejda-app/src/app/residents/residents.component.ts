@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { DataService } from '../data/data.service';
 import { Apartment, Announcement, Floor } from '../data/interfaces';
 
 @Component({
   selector: 'vn-residents',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatCardModule, MatIconModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+  ],
   templateUrl: './residents.component.html',
   styleUrl: './residents.component.scss',
 })
@@ -31,7 +38,6 @@ export class ResidentsComponent implements OnInit {
       this.floors = [...data.floors];
       // Force change detection
       this.cdr.detectChanges();
-      console.log(this.floors);
     });
   }
 

@@ -23,3 +23,13 @@ export interface AccountBalances {
   currentExpensesBalance: number;
   repairsBalance: number;
 }
+
+export interface Bill {
+  id: number;
+  type: string; // e.g., "Електричество", "Вода", "Отопление"
+  amount: number;
+  dueDate: string; // Format: "DD-MMM-YYYY"
+  paid: boolean;
+  paidDate?: string; // Format: "DD-MMM-YYYY"
+  description?: string;
+}

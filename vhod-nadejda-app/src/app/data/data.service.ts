@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Announcement, Floor, AccountBalances } from './interfaces';
+import { Observable, map, of } from 'rxjs';
+import { Announcement, Floor, AccountBalances, Bill } from './interfaces';
 import { CsvDataService } from './csv-data.service';
 import {
   announcements as staticAnnouncements,
   accountBalances as staticAccountBalances,
+  bills as staticBills,
 } from './residents.data';
 
 @Injectable({
@@ -30,5 +31,12 @@ export class DataService {
         floors,
       }))
     );
+  }
+
+  /**
+   * Load bills from constants (manually updated)
+   */
+  loadBills(): Observable<Bill[]> {
+    return of(staticBills);
   }
 }

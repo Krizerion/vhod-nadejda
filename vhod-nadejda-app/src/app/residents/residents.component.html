@@ -1,5 +1,11 @@
 <div class="residents-container">
-  <h1>Информация за жителите</h1>
+  <div class="page-header">
+    <h1>Информация за жителите</h1>
+    <a mat-button [routerLink]="['/bills']" class="bills-link">
+      <mat-icon>receipt_long</mat-icon>
+      Сметки
+    </a>
+  </div>
 
   <!-- Important Announcements -->
   @if (announcements.length > 0) {

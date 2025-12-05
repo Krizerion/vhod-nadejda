@@ -35,7 +35,21 @@ html, body {
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f5f5f5;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+}
+
+// Better focus states for accessibility
+*:focus-visible {
+  outline: 2px solid var(--mat-primary-color);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 // Tippy.js custom theme for fee tooltip

@@ -80,6 +80,7 @@
               <div
                 class="apartment-debt"
                 [class.no-debt]="(apt.totalDebt || 0) === 0"
+                [class.has-debt]="(apt.totalDebt || 0) > 0"
               >
                 €{{ apt.totalDebt || 0 | number : "1.2-2" }}
               </div>

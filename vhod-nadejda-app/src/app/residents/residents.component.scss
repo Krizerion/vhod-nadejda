@@ -236,10 +236,14 @@
             .apartment-debt {
               font-size: 1.1rem;
               font-weight: 500;
-              color: var(--mat-warn-color);
+              color: #f44336; // Default red for debt
 
               &.no-debt {
-                color: #4caf50;
+                color: #4caf50 !important; // Green for zero debt
+              }
+
+              &.has-debt {
+                color: #f44336 !important; // Red for debt > 0
               }
             }
           }

@@ -3,15 +3,15 @@ import { Announcement, Floor, AccountBalances } from './interfaces';
 export const announcements: Announcement[] = [
   {
     id: 1,
-    message: 'Следващо събрание на входа: 15.03.2024 г. в 18:00 ч.',
+    message: 'Следващо събрание на входа: 24 февруари 2026 г. в 19:30 ч.',
     icon: 'event',
   },
   // Add more announcements as needed
 ];
 
 export const accountBalances: AccountBalances = {
-  currentExpensesBalance: 0,
-  repairsBalance: 0,
+  currentExpensesBalance: 511,
+  repairsBalance: 260,
 };
 
 export const floors: Floor[] = [

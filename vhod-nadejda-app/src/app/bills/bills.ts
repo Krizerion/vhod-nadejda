@@ -32,7 +32,10 @@ export class BillsComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.loadBills().subscribe({
       next: (bills) => {
-        this.bills = [...bills].sort(this.sortByMostRecentlyPaid);
+        // Use arrow comparator to keep `this` context for helper methods
+        this.bills = [...bills].sort((a, b) =>
+          this.sortByMostRecentlyPaid(a, b)
+        );
         this.cdr.detectChanges();
       },
       error: () => {

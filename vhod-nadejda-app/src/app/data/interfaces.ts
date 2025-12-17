@@ -28,7 +28,6 @@ export interface Bill {
   id: number;
   type: string; // e.g., "Електричество", "Вода", "Отопление"
   amount: number | null;
-  dueDate: string; // Format: "DD-MMM-YYYY"
   paid: boolean;
   paidDate?: string | null; // Format: "DD-MMM-YYYY"
   description?: string;

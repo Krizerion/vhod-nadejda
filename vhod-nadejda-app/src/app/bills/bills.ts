@@ -32,7 +32,7 @@ export class BillsComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.loadBills().subscribe({
       next: (bills) => {
-        this.bills = [...bills];
+        this.bills = [...bills].sort(this.sortByMostRecentlyPaid);
         this.cdr.detectChanges();
       },
       error: () => {
@@ -53,5 +53,50 @@ export class BillsComponent implements OnInit {
       'Общи части': 'apartment',
     };
     return iconMap[type] || 'receipt';
+  }
+
+  private sortByMostRecentlyPaid(a: Bill, b: Bill): number {
+    const aTs = this.getPaidTimestamp(a);
+    const bTs = this.getPaidTimestamp(b);
+    // Desc (most recent first)
+    return bTs - aTs;
+  }
+
+  private getPaidTimestamp(bill: Bill): number {
+    if (!bill.paid || !bill.paidDate) {
+      // Unpaid / missing paid date should go to the bottom
+      return Number.NEGATIVE_INFINITY;
+    }
+    return this.parseDate(bill.paidDate);
+  }
+
+  private parseDate(value: string): number {
+    // "31-Dec-2025" -> timestamp
+    const parts = value.split('-');
+    if (parts.length !== 3) {
+      return Number.NEGATIVE_INFINITY;
+    }
+    const day = Number(parts[0]);
+    const mon = parts[1];
+    const year = Number(parts[2]);
+    const monthMap: Record<string, number> = {
+      Jan: 0,
+      Feb: 1,
+      Mar: 2,
+      Apr: 3,
+      May: 4,
+      Jun: 5,
+      Jul: 6,
+      Aug: 7,
+      Sep: 8,
+      Oct: 9,
+      Nov: 10,
+      Dec: 11,
+    };
+    const month = monthMap[mon];
+    if (month === undefined || Number.isNaN(day) || Number.isNaN(year)) {
+      return Number.NEGATIVE_INFINITY;
+    }
+    return new Date(year, month, day).getTime();
   }
 }

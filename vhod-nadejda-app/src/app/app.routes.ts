@@ -17,7 +17,13 @@ export const routes: Routes = [
   },
   {
     path: 'bills',
+    loadComponent: () => import('./bills/bills').then((m) => m.BillsComponent),
+  },
+  {
+    path: 'account/:type',
     loadComponent: () =>
-      import('./bills/bills').then((m) => m.BillsComponent),
+      import('./account-details/account-details.component').then(
+        (m) => m.AccountDetailsComponent
+      ),
   },
 ];

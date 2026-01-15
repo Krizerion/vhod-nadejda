@@ -23,7 +23,7 @@ import { Apartment, Announcement, Floor } from '../data/interfaces';
 export class ResidentsComponent implements OnInit {
   announcements: Announcement[] = [];
   currentExpensesBalance = 0;
-  repairsBalance = 0;
+  currentRepairsBalance = 0;
   floors: Floor[] = [];
   lastUpdate = 'декември 2025';
 
@@ -34,9 +34,40 @@ export class ResidentsComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.loadData().subscribe((data) => {
       this.announcements = [...data.announcements];
-      this.currentExpensesBalance = data.accountBalances.currentExpensesBalance;
-      this.repairsBalance = data.accountBalances.repairsBalance;
       this.floors = [...data.floors].reverse();
+
+      // Calculate current balances: balance from 2025 + income - expenses for 2026
+      const expensesBalance2025 = data.accountBalances.expensesBalance2025;
+      const repairsBalance2025 = data.accountBalances.repairsBalance2025;
+
+      // Load transactions for current expenses
+      this.dataService
+        .loadAccountTransactions('currentExpenses')
+        .subscribe((transactions) => {
+          const income = transactions
+            .filter((t) => t.type === 'income')
+            .reduce((sum, t) => sum + t.amount, 0);
+          const expenses = transactions
+            .filter((t) => t.type === 'expense')
+            .reduce((sum, t) => sum + t.amount, 0);
+          this.currentExpensesBalance = expensesBalance2025 + income - expenses;
+          this.cdr.detectChanges();
+        });
+
+      // Load transactions for repairs
+      this.dataService
+        .loadAccountTransactions('repairs')
+        .subscribe((transactions) => {
+          const income = transactions
+            .filter((t) => t.type === 'income')
+            .reduce((sum, t) => sum + t.amount, 0);
+          const expenses = transactions
+            .filter((t) => t.type === 'expense')
+            .reduce((sum, t) => sum + t.amount, 0);
+          this.currentRepairsBalance = repairsBalance2025 + income - expenses;
+          this.cdr.detectChanges();
+        });
+
       // Force change detection
       this.cdr.detectChanges();
     });
@@ -48,5 +79,9 @@ export class ResidentsComponent implements OnInit {
     }
 
     this.router.navigate(['/apartment', apartment.number]);
+  }
+
+  openAccountDetails(accountType: 'currentExpenses' | 'repairs'): void {
+    this.router.navigate(['/account', accountType]);
   }
 }

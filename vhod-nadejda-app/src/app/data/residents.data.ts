@@ -1,4 +1,4 @@
-import { Announcement, AccountBalances, Bill } from './interfaces';
+import { Announcement, AccountBalances, Bill, Transaction } from './interfaces';
 
 export const announcements: Announcement[] = [
   {
@@ -10,8 +10,8 @@ export const announcements: Announcement[] = [
 ];
 
 export const accountBalances: AccountBalances = {
-  currentExpensesBalance: 349.13,
-  repairsBalance: 267.67,
+  expensesBalance2025: 349.13,
+  repairsBalance2025: 267.67,
 };
 
 export const bills: Bill[] = [
@@ -46,5 +46,33 @@ export const bills: Bill[] = [
     paid: true,
     paidDate: '12-Dec-2025',
     description: 'Поддръжка на асансьор до края на март 2026',
+  },
+];
+
+export const transactions: Transaction[] = [
+  // {
+  //   id: 19,
+  //   accountType: 'currentExpenses',
+  //   type: 'expense',
+  //   amount: 6.14,
+  //   date: '16-Dec-2025',
+  //   description: 'Плащане на сметка за ток общи части',
+  // },
+  // Transactions for Repairs Account
+  {
+    id: 150120261,
+    accountType: 'currentExpenses',
+    type: 'income',
+    amount: 144,
+    date: '15-Jan-2026',
+    description: 'Платени такси за цялата година от апартаменти 121 и 134',
+  },
+  {
+    id: 150120262,
+    accountType: 'repairs',
+    type: 'income',
+    amount: 60.0,
+    date: '15-Jan-2026',
+    description: 'Платени такси за цялата година от апартаменти 121 и 134',
   },
 ];

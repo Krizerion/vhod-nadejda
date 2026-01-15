@@ -1,11 +1,18 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map, of } from 'rxjs';
-import { Announcement, Floor, AccountBalances, Bill } from './interfaces';
+import {
+  Announcement,
+  Floor,
+  AccountBalances,
+  Bill,
+  Transaction,
+} from './interfaces';
 import { CsvDataService } from './csv-data.service';
 import {
   announcements as staticAnnouncements,
   accountBalances as staticAccountBalances,
   bills as staticBills,
+  transactions as staticTransactions,
 } from './residents.data';
 
 @Injectable({
@@ -38,5 +45,27 @@ export class DataService {
    */
   loadBills(): Observable<Bill[]> {
     return of(staticBills);
+  }
+
+  /**
+   * Load transactions for a specific bill
+   */
+  loadTransactions(billId: number): Observable<Transaction[]> {
+    const billTransactions = staticTransactions.filter(
+      (t) => t.billId === billId
+    );
+    return of(billTransactions);
+  }
+
+  /**
+   * Load transactions for a specific account type
+   */
+  loadAccountTransactions(
+    accountType: 'currentExpenses' | 'repairs'
+  ): Observable<Transaction[]> {
+    const accountTransactions = staticTransactions.filter(
+      (t) => t.accountType === accountType
+    );
+    return of(accountTransactions);
   }
 }

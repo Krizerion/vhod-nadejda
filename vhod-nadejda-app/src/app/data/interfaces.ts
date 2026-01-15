@@ -20,8 +20,8 @@ export interface Announcement {
 }
 
 export interface AccountBalances {
-  currentExpensesBalance: number;
-  repairsBalance: number;
+  expensesBalance2025: number;
+  repairsBalance2025: number;
 }
 
 export interface Bill {
@@ -31,4 +31,14 @@ export interface Bill {
   paid: boolean;
   paidDate?: string | null; // Format: "DD-MMM-YYYY"
   description?: string;
+}
+
+export interface Transaction {
+  id: number;
+  billId?: number; // For bill-specific transactions
+  accountType?: 'currentExpenses' | 'repairs'; // For account-specific transactions
+  type: 'income' | 'expense';
+  amount: number;
+  date: string; // Format: "DD-MMM-YYYY"
+  description: string;
 }

@@ -34,7 +34,10 @@
 
   <!-- Account Balances -->
   <div class="accounts-section">
-    <mat-card class="account-card">
+    <mat-card
+      class="account-card clickable"
+      (click)="openAccountDetails('currentExpenses')"
+    >
       <mat-card-content>
         <div class="account-header">
           <mat-icon class="account-icon">account_balance</mat-icon>
@@ -48,14 +51,17 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="account-card">
+    <mat-card
+      class="account-card clickable"
+      (click)="openAccountDetails('repairs')"
+    >
       <mat-card-content>
         <div class="account-header">
           <mat-icon class="account-icon">home_repair_service</mat-icon>
           <div class="account-info">
             <h2>Пари в Сметка за ремонти</h2>
             <p class="account-amount">
-              €{{ repairsBalance | number : "1.2-2" }}
+              €{{ currentRepairsBalance | number : "1.2-2" }}
             </p>
           </div>
         </div>

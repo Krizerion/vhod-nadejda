@@ -1,9 +1,9 @@
-import { Announcement, Floor, AccountBalances, Bill } from './interfaces';
+import { Announcement, AccountBalances, Bill } from './interfaces';
 
 export const announcements: Announcement[] = [
   {
     id: 1,
-    message: 'Следващо събрание на входа: 24 февруари 2026 г. в 19:30 ч.',
+    message: 'Следващо събрание на входа: 19 февруари 2026 г. в 19:30 ч.',
     icon: 'event',
   },
   // Add more announcements as needed

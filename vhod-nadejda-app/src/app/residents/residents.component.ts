@@ -25,7 +25,7 @@ export class ResidentsComponent implements OnInit {
   currentExpensesBalance = 0;
   currentRepairsBalance = 0;
   floors: Floor[] = [];
-  lastUpdate = 'декември 2025';
+  lastUpdate = '19 януари 2026';
 
   private readonly router = inject(Router);
   private readonly dataService = inject(DataService);

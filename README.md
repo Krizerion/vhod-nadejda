@@ -22,7 +22,13 @@ npm start
 
 ## Деплой
 
-За инструкции как да публикувате приложението на GitHub Pages или други безплатни хостинг платформи, вижте [DEPLOYMENT.md](./DEPLOYMENT.md)
+### Railway (Препоръчително)
+
+За подробни инструкции за деплой на Railway, вижте [RAILWAY_DEPLOYMENT.md](./RAILWAY_DEPLOYMENT.md)
+
+### GitHub Pages
+
+За инструкции как да публикувате приложението на GitHub Pages, вижте [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ## Технологии
 

@@ -40,7 +40,11 @@ npm start
 
 ## Деплой
 
-За инструкции как да публикувате приложението на GitHub Pages или други безплатни хостинг платформи, вижте [DEPLOYMENT.md](./DEPLOYMENT.md)
+За инструкции как да публикувате приложението:
+
+- **AWS Deployment**: Вижте [AWS_DEPLOYMENT_GUIDE.md](./AWS_DEPLOYMENT_GUIDE.md) за пълно ръководство
+- **Quick Start**: Вижте [QUICK_START_AWS.md](./QUICK_START_AWS.md) за бърз старт
+- **GitHub Pages**: Вижте [DEPLOYMENT.md](./DEPLOYMENT.md) за безплатен хостинг
 
 ## Технологии
 

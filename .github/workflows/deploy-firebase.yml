@@ -1,0 +1,50 @@
+name: Deploy Frontend to Firebase Hosting
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'vhodly-app/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: vhodly-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./vhodly-app
+        run: npm ci
+
+      - name: Build Angular app
+        working-directory: ./vhodly-app
+        env:
+          API_URL: ${{ secrets.API_URL }}
+        run: |
+          # Replace API URL in environment.prod.ts if secret is provided
+          if [ -n "$API_URL" ]; then
+            sed -i "s|apiUrl:.*|apiUrl: '$API_URL',|" src/environments/environment.prod.ts
+          fi
+          npm run build:prod
+
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
+          channelId: live
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}

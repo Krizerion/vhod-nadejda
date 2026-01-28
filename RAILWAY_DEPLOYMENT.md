@@ -41,22 +41,49 @@ Before deploying to Railway, ensure you have:
 
 Railway will automatically:
 - Detect the `railway.json` configuration file
+- Detect Node.js version from `.nvmrc` file (Node.js 20)
 - Use the build command: `npm ci && npm run build`
 - Use the start command: `npm run start:server`
 - Set up the service on a default port
+
+### Step 4: Set Node.js Version (If Auto-Detection Fails)
+
+If Railway doesn't automatically detect Node.js 20 from `.nvmrc`:
+
+1. Go to your service in Railway dashboard
+2. Click **"Variables"** tab
+3. Add a new variable:
+   - **Name**: `NIXPACKS_NODE_VERSION`
+   - **Value**: `20`
+4. Save and redeploy
 
 ## Configuration Files
 
 The following files have been created/configured for Railway deployment:
 
-### 1. `nixpacks.toml` (Node.js Version Configuration)
+### 1. `.nvmrc` (Node.js Version Configuration)
+
+Located at: `vhodly-app/.nvmrc`
+
+```
+20
+```
+
+**What it does:**
+- **CRITICAL**: Specifies Node.js version 20 for Railway/Nixpacks
+- Railway automatically detects and uses this file
+- Ensures correct Node.js version is used during build
+
+**Why this is needed:**
+- Angular 21 requires Node.js >=20.19.0
+- Railway's default Node.js version may be older (18.x)
+- This file ensures the correct version is used
+
+### 2. `nixpacks.toml` (Build Configuration)
 
 Located at: `vhodly-app/nixpacks.toml`
 
 ```toml
-[phases.setup]
-nixPkgs = ["nodejs-20_x"]
-
 [phases.install]
 cmds = ["npm ci"]
 
@@ -68,27 +95,12 @@ cmd = "npm run start:server"
 ```
 
 **What it does:**
-- **CRITICAL**: Forces Railway/Nixpacks to use Node.js 20.x (required for Angular 21)
 - Defines the build phases explicitly
-- Ensures correct Node.js version is used during build
+- Runs `npm ci` to install dependencies
+- Builds the Angular app
+- Starts the Express server
 
-**Why this is needed:**
-- Angular 21 requires Node.js >=20.19.0
-- Railway's default Node.js version may be older (18.x)
-- This file ensures the correct version is used
-
-### 2. `.nvmrc`
-
-Located at: `vhodly-app/.nvmrc`
-
-```
-20
-```
-
-**What it does:**
-- Specifies Node.js version 20 for NVM (Node Version Manager)
-- Provides a fallback method for Node.js version detection
-- Works alongside `nixpacks.toml` for maximum compatibility
+**Note:** Node.js version is controlled by `.nvmrc` file, not this config.
 
 ### 3. `railway.json`
 
@@ -249,11 +261,21 @@ If using a subdirectory:
 - **Symptom**: Warnings about unsupported Node.js engine, build fails or Angular packages complain
 - **Cause**: Railway is using Node.js 18.x but Angular 21 requires Node.js >=20.19.0
 - **Solution**: 
-  - Ensure `nixpacks.toml` exists with `nixPkgs = ["nodejs-20_x"]`
-  - Verify `.nvmrc` contains `20`
+  - Verify `.nvmrc` contains `20` (should be in `vhodly-app/.nvmrc`)
   - Check `package.json` has `engines.node: ">=20.19.0"`
-  - Redeploy after committing these files
+  - If Railway still doesn't detect Node.js 20, set environment variable in Railway dashboard:
+    - Go to service → **Variables** tab
+    - Add: `NIXPACKS_NODE_VERSION` = `20`
+  - Redeploy after making changes
   - Railway should now use Node.js 20.x
+
+**Error: "undefined variable 'nodejs-20_x'"**
+- **Symptom**: Build fails with Nix/Nixpacks error about undefined variable
+- **Cause**: Invalid syntax in `nixpacks.toml` trying to specify Node.js version
+- **Solution**: 
+  - Remove any `[phases.setup]` section with `nixPkgs` from `nixpacks.toml`
+  - Rely on `.nvmrc` file for Node.js version detection
+  - Or set `NIXPACKS_NODE_VERSION=20` environment variable in Railway dashboard
 
 **Error: "npm ci failed"**
 - Check that `package-lock.json` exists and is committed

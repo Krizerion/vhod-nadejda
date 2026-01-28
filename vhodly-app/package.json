@@ -1,11 +1,11 @@
 {
-  "name": "vhod-nadejda-app",
+  "name": "vhodly-app",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:gh-pages": "ng build --base-href=\"/vhod-nadejda/\"",
+    "build:gh-pages": "ng build --base-href=\"/vhodly/\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "biome check .",

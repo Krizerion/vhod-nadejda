@@ -17,7 +17,7 @@ The project includes a GitHub Actions workflow that automatically deploys to Git
    ```bash
    git add .
    git commit -m "Initial commit"
-   git remote add origin https://github.com/Krizerion/vhod-nadejda.git
+   git remote add origin https://github.com/Krizerion/vhodly.git
    git push -u origin main
    ```
 
@@ -30,7 +30,7 @@ The project includes a GitHub Actions workflow that automatically deploys to Git
 3. **The workflow will automatically:**
    - Build your Angular app when you push to `main`
    - Deploy it to GitHub Pages
-   - Your site will be available at: `https://Krizerion.github.io/vhod-nadejda/`
+   - Your site will be available at: `https://Krizerion.github.io/vhodly/`
 
 ## Manual Deployment
 
@@ -38,7 +38,7 @@ If you prefer to deploy manually:
 
 1. **Build the app for GitHub Pages:**
    ```bash
-   cd vhod-nadejda-app
+   cd vhodly-app
    npm run build:gh-pages
    ```
 
@@ -49,7 +49,7 @@ If you prefer to deploy manually:
 
 3. **Add deploy script to package.json:**
    ```json
-   "deploy": "gh-pages -d dist/vhod-nadejda-app/browser"
+   "deploy": "gh-pages -d dist/vhodly-app/browser"
    ```
 
 4. **Deploy:**
@@ -59,7 +59,7 @@ If you prefer to deploy manually:
 
 ## Important Notes
 
-- **Repository Name:** If your repository has a different name than `vhod-nadejda`, you need to update the `base-href` in:
+- **Repository Name:** If your repository has a different name than `vhodly`, you need to update the `base-href` in:
   - `.github/workflows/deploy.yml` (line with `--base-href`)
   - `package.json` script `build:gh-pages`
   - The base href should be: `"/YOUR_REPO_NAME/"`
@@ -78,14 +78,14 @@ If you prefer other free hosting:
 
 1. **Netlify:**
    - Connect your GitHub repo
-   - Build command: `cd vhod-nadejda-app && npm ci && npm run build`
-   - Publish directory: `vhod-nadejda-app/dist/vhod-nadejda-app/browser`
-   - Base directory: `vhod-nadejda-app`
+   - Build command: `cd vhodly-app && npm ci && npm run build`
+   - Publish directory: `vhodly-app/dist/vhodly-app/browser`
+   - Base directory: `vhodly-app`
 
 2. **Vercel:**
    - Connect your GitHub repo
    - Framework preset: Angular
-   - Root directory: `vhod-nadejda-app`
+   - Root directory: `vhodly-app`
 
 3. **Firebase Hosting:**
    - Install Firebase CLI: `npm install -g firebase-tools`

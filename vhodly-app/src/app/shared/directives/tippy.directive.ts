@@ -11,11 +11,11 @@ import tippy, { Instance, Props } from 'tippy.js';
 import 'tippy.js/dist/tippy.css';
 
 @Directive({
-  selector: '[vnTippy]',
+  selector: '[vhTippy]',
   standalone: true,
 })
 export class TippyDirective implements OnInit, OnChanges, OnDestroy {
-  @Input('vnTippy') content: string | undefined = '';
+  @Input('vhTippy') content: string | undefined = '';
   @Input() tippyOptions: Partial<Props> = {};
 
   private instance: Instance<Props> | null = null;

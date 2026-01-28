@@ -9,7 +9,7 @@ import { Bill } from '../data/interfaces';
 import { MonthYearPipe } from '../shared/pipes/month-year.pipe';
 
 @Component({
-  selector: 'vn-bills',
+  selector: 'vh-bills',
   standalone: true,
   imports: [
     CommonModule,
@@ -34,7 +34,7 @@ export class BillsComponent implements OnInit {
       next: (bills) => {
         // Use arrow comparator to keep `this` context for helper methods
         this.bills = [...bills].sort((a, b) =>
-          this.sortByMostRecentlyPaid(a, b)
+          this.sortByMostRecentlyPaid(a, b),
         );
         this.cdr.detectChanges();
       },

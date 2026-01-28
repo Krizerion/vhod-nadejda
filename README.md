@@ -1,4 +1,4 @@
-# vhod-nadejda
+# Vhodly
 
 Управление на вход - Информационна система за жители
 
@@ -13,7 +13,7 @@
 ## Разработка
 
 ```bash
-cd vhod-nadejda-app
+cd vhodly-app
 npm install
 npm start
 ```

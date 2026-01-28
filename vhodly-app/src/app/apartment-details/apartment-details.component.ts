@@ -19,7 +19,7 @@ import { TippyDirective } from '../shared/directives/tippy.directive';
 import { DataService } from '../data/data.service';
 
 @Component({
-  selector: 'vn-apartment-details',
+  selector: 'vh-apartment-details',
   standalone: true,
   imports: [
     CommonModule,
@@ -100,11 +100,21 @@ export class ApartmentDetailsComponent
     const currentExpensesFee = this.apartment.currentExpensesFee || 0;
     const monthlyFee = repairsFee + currentExpensesFee;
     const residentsCount = this.apartment.residentsCount || 0;
-    
+
     // Determine fee per person based on floor
-    const feePerPerson = this.floorNumber !== null && this.floorNumber !== undefined && this.floorNumber <= 2 ? 1.5 : 4.0;
-    const floorRange = this.floorNumber !== null && this.floorNumber !== undefined && this.floorNumber <= 2 ? '1-2' : '3-8';
-    
+    const feePerPerson =
+      this.floorNumber !== null &&
+      this.floorNumber !== undefined &&
+      this.floorNumber <= 2
+        ? 1.5
+        : 4.0;
+    const floorRange =
+      this.floorNumber !== null &&
+      this.floorNumber !== undefined &&
+      this.floorNumber <= 2
+        ? '1-2'
+        : '3-8';
+
     // Format numbers with 2 decimal places (using dot as decimal separator for consistency)
     const formatNumber = (num: number): string => {
       return num.toFixed(2);

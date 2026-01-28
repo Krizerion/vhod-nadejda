@@ -6,12 +6,12 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "vhod-nadejda-app": {
+    "vhodly-app": {
       "projectType": "application",
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "vn",
+      "prefix": "vh",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -54,10 +54,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "vhod-nadejda-app:build:production"
+              "buildTarget": "vhodly-app:build:production"
             },
             "development": {
-              "buildTarget": "vhod-nadejda-app:build:development"
+              "buildTarget": "vhodly-app:build:development"
             }
           },
           "defaultConfiguration": "development"
